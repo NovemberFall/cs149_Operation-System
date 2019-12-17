@@ -67,3 +67,23 @@
 
 
 ### Interrupt Vector & Handling
+
+
+
+
+### Storage Structure 储存结构
+- Main memory – only storage media directly accessible by CPU
+    - Random access 随机访问
+    - Typically volatile(不稳定的)
+- Secondary storage – extension of main memory, large nonvolatile storage 辅助存储–主内存扩展，大型非易失性存储
+- Hard disks –metal or glass platters covered with magnetic recording material, nonvolatile 硬盘–覆盖有磁性记录材料的金属或玻璃盘片，非易失性
+    - Sectors, tracks, cylinders
+    - disk controller: interaction between the device and the computer 磁盘控制器：设备与计算机之间的交互
+- CD, DVD, etc.
+
+### Storage-Device Hierarchy 存储设备层次结构
+![](img/2019-12-17-11-28-32.png)
+
+
+### Cache 电脑高速缓冲存储器
+![](img/2019-12-17-11-32-23.png)
