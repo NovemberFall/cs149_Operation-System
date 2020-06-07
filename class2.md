@@ -51,3 +51,27 @@
 
 - Distribution is the name, so when you have a custom build an open source of system that's called
   the distribution 
+
+
+---
+![](img/2020-06-07-15-27-11.png)
+
+- Yes
+
+
+---
+![](img/2020-06-07-15-28-26.png)
+
+- D
+
+---
+![](img/2020-06-07-15-30-43.png)
+
+- D
+- a timer is what the operating system uses in order to prevent programs from running forever. so you
+  might the operating system might create a signal like every two minutes. You know that once if 
+  something has been running non-stop for two minutes, then it will yield for another process to run
+  so a program counters different a program counters, just the register which keeps track of the of 
+  the inspection that is executing in the current programs control flow.
+  So a timer is what the operating system users internally in order to ensure that a process will not
+  run forever, and that it will be interrupted and yield to processes that are waiting.
