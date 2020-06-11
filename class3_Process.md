@@ -81,7 +81,7 @@ else if(pid > 0){
 ```c++
 p = fork();
 if (0 == p){
-    // We're the child process
+  // We're the child process
 }
 else if (p > 0){
     // We're the parent process
@@ -101,6 +101,30 @@ else{
         printf("parent\n");       |              printf("child\n");
         ...                       |              ...
 ```
+---
+
+![](img/2020-06-11-03-14-51.png)
+
+- D  All of the above is correct.
+  
+
+![](img/2020-06-11-15-45-57.png)
+- D
+
+![](img/2020-06-11-15-46-59.png)
+- C, The term here is context switch so context, which means that the current process hash 
+  its date saved and another processes, getting a restored and the CPU goes switches from
+  the old process to the new process
+
+![](img/2020-06-11-15-51-35.png)
+- B, but A is also ok
 
 
+![](img/2020-06-11-15-57-22.png)
+![](img/2020-06-11-15-56-47.png)
+- A
 
+
+![](img/2020-06-11-15-58-21.png)
+- C is the best answer
+- but A is also ok
