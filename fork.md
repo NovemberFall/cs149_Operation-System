@@ -104,3 +104,50 @@ fork();
   variable before forking a process.</u> Hence both the processes can have process-ids
   of each other in case they want to interact with each other thru inter process
   commmunication.
+
+
+- For example:
+
+```c++
+#include<stdio.h>
+#include<stdlib.h>
+#include <unistd.h>
+#include <sys/types.h> 
+
+int main(){
+    printf("Start...\n");
+    pid_t pid = fork();
+
+    if(pid == -1){
+        printf("Unable to create child process\n");  
+    }else if(pid == 0){
+        printf("Inside Child Process\n");
+    }else{
+        printf("Inside Parent\n");
+    }
+}
+
+
+/* 
+Start...
+Inside Parent
+Inside Child Process
+ */
+```
+
+
+- If process creation is successful, then Parent process will output:
+
+```js
+Start...
+
+Inside Parent
+
+//and child process will output:
+
+Inside Child Process
+
+```
+
+- Separate address space for the child will be created with exact copy of all the memory 
+  segments from the parent process.
