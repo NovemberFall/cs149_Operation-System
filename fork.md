@@ -151,3 +151,7 @@ Inside Child Process
 
 - Separate address space for the child will be created with exact copy of all the memory 
   segments from the parent process.
+
+
+
+![](img/2020-06-22-17-38-57.png)
