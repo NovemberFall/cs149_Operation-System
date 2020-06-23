@@ -65,9 +65,19 @@ fork()
 
  */
 ```
+---
+### How to capture a child's exit code programmming in c
+
+![](img/2020-06-23-09-23-54.png)
 
 
 
+- [wait()](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
+- [exec()](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
+
+
+
+---
 ![](img/2020-06-11-21-20-39.png)
 - A
   - this system won't return until the child has run and exited. Thus, even when the 
