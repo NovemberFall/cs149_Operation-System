@@ -73,7 +73,7 @@ fork()
 
 
 - [wait()](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
-- [exec()](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
+- [how to use `exec()`](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
 
 
 
