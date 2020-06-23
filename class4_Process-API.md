@@ -83,83 +83,16 @@ fork()
   - this system won't return until the child has run and exited. Thus, even when the 
   parent run first, it politely waits for the child to finish running, then wait() 
   returns, and then the parent prints its message.
+---
 
 ![](img/2020-06-12-06-28-35.png)
 - A, what exactly is going to do it's going to replace the child process address space
   with the program 
 
-```c++
-//p2.c
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
 
-int main(int argc, char *argv[]){
-    printf("hello world (pid:%d)\n", (int) getpid());
-    int rc = fork();
-    // printf("This is testing. rc = %d\n", rc);
-    if (rc < 0) { 	// fork failed; exit
-        fprintf(stderr, "fork failed\n");
-        exit(1);
-    } else if (rc == 0) { // child (new process)
-        printf("hello, I am child (pid:%d)\n", (int) getpid());
-    } else { 		// parent goes down this path (main)
-        int wc = wait(NULL);
-        // int wc = 0;
-        printf("hello, I am parent of %d (wc:%d) (pid:%d)\n",
-        rc, wc, (int) getpid());
-    }
-    return 0;
-}
-```
 
-```c++
-//p3.c
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/wait.h>
 
-int main(int argc, char *argv[]){
-    printf("hello world (pid:%d)\n", (int) getpid());
-    int rc = fork();
-    if (rc < 0) { 		// fork failed; exit
-        fprintf(stderr, "fork failed\n");
-        exit(1);
-    } else if (rc == 0) { 	// child (new process)
-        printf("hello, I am child (pid:%d)\n", (int) getpid());
-        char *myargs[3];
-        myargs[0] = strdup("wc"); 		// program: "wc" (word count)
-        myargs[1] = strdup("./p3.c"); 	// argument: file to count
-        myargs[2] = NULL; 		// marks end of array
 
-        execvp(myargs[0], myargs); // runs word count
-        //可以注释屌这行，就会发现不再执行, 转而printf
-        printf("this shouldn’t print out");
-    } else { 			// parent goes down this path (main)
-        int wc = wait(NULL);
-        printf("hello, I am parent of %d (wc:%d) (pid:%d)\n",
-               rc, wc, (int) getpid());
-    }
-    return 0;
-}
-
-```
-
-  - calling `fork()`in p2.c is only useful if you want to keep running copies of the same 
-    program However, often you want to run a different program; exec() does just that(p3c)
-  - In this example, the child process calls `execvp()` in order to run the program `wc`,
-    which is the word counting program. In fact, it runs `wc` on the source file `p3.c`, 
-    thus, telling us how many lines, words, and bytes are found in the file: 
-
-```
-hello world (pid:21163)
-hello, I am child (pid:21164)
-      28     121     939 ./p3.c
-hello, I am parent of 21164 (wc:21164) (pid:21163)
-```
 ---
 
 ## Now look at p4.c example
@@ -204,16 +137,17 @@ int main(int argc, char *argv[]){
 
 ![](img/2020-06-12-11-32-24.png)
 - D
-
+---
 
 
 ![](img/2020-06-12-11-32-56.png)
 - B, because after the child process for it will continue execution from the next
   instruction. So the address of the next instruction is in the program counter.
+---
 
 ![](img/2020-06-12-11-36-00.png)
 - D
-
+---
 
 
 ![](img/2020-06-12-11-40-50.png)
