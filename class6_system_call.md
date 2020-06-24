@@ -11,3 +11,141 @@
   - If set, the file offset will be set to the end of the file prior to each write.
 
 
+##  What are system calls?
+
+![](img/2020-06-23-22-13-21.png)
+
+![](img/2020-06-23-22-13-33.png)
+
+
+## Why study the I/O system calls?
+
+- I/O system calls:
+  - form the basis of file I/O
+  - are the foundation of virtually all communication on Linux.
+- Recall: In all variations of Linux, because in Unix based operation systems
+  Everything is a file. So everything that you're doing a Unix based operating
+  systems, a file and represented by files. Thus, I/O are very important
+
+---
+![](img/2020-06-23-22-19-34.png)
+- A
+
+---
+![](img/2020-06-23-22-20-09.png)
+- A , this question is tricky, when you first execute a C program the CPU is 
+  initially in user mode. And it only enters kernel mode when makes a system call
+  so kernel mode is not the default mode of execution. 
+
+---
+![](img/2020-06-23-22-25-35.png)
+- B  ; behalf(代表)
+
+---
+![](img/2020-06-23-22-26-42.png)
+- A
+
+---
+
+![](img/2020-06-23-22-30-05.png)
+![](img/2020-06-23-22-30-15.png)
+---
+
+![](img/2020-06-23-22-30-32.png)
+- b
+---
+
+![](img/2020-06-23-22-31-38.png)
+- C
+---
+
+![](img/2020-06-23-22-44-02.png)
+![](img/2020-06-23-22-44-26.png)
+
+- Note: 0644, everyone belongs in a group in Unix based operating system and what is
+  0644, means is that owner will have permissions have read and write.
+
+![](img/2020-06-23-22-53-34.png)
+- a,  In memory, we have the table of `file descriptor`, is pointing to a 
+  `file table entry` which contains file offset. And it also points to `V-node`
+  i-node is on the disk, not in memory. 
+
+![](img/2020-06-23-23-27-06.png)
+
+---
+
+![](img/2020-06-23-23-28-32.png)
+- a
+---
+
+![](img/2020-06-23-23-29-34.png)
+
+![](img/2020-06-23-23-35-18.png)
+
+- Now, in this case open the file, opening a file then forking so first you open 
+  a file and then you fork, all of `file descriptors` got copied into the child.
+  so both a parent and the child have identical `file descriptors`. When parent
+  increments the offset that offset will be mirrored in the child process.
+
+- so the offset when it's changed in parent. It's also changed for the child 
+  because both parent and child pointing to the same data structures and they
+  share the same offset.
+
+
+```c++
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+int main()
+{
+    char c;
+    int fd;
+    mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+    const char *pathname = "open-then-fork.out";
+    fd = open(pathname, O_WRONLY | O_CREAT | O_TRUNC, mode);
+    if (fork() == 0)
+        sleep(1);
+
+    for (c = 'A'; c < 'A' + 5; c++) {
+        write(fd, &c, 1);
+        sleep(2);
+    }
+
+    close(fd);
+    return 0;
+}
+
+/* 
+AABBCCDDEE
+ */
+```
+
+---
+![](img/2020-06-24-00-06-34.png)
+- C 
+
+---
+
+![](img/2020-06-24-00-13-36.png)
+- b
+  - `read, write, execute` mode
+
+---
+
+![](img/2020-06-24-00-17-40.png)
+- c
+
+---
+![](img/2020-06-24-00-18-35.png)
+- d, handing system calls, it will return 0, means success and -1 means failure.
+
+---
+
+## lseek
+
+![](img/2020-06-24-00-22-43.png)
+
