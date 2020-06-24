@@ -71,12 +71,6 @@ fork()
 ![](img/2020-06-23-09-23-54.png)
 
 
-
-- [wait()](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
-- [how to use `exec()`](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
-
-
-
 ---
 ![](img/2020-06-11-21-20-39.png)
 - A
@@ -85,17 +79,31 @@ fork()
   returns, and then the parent prints its message.
 ---
 
+- [reference to `wait()`](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
+- [reference to `exec()`](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
+
+---
 ![](img/2020-06-12-06-28-35.png)
 - A, what exactly is going to do it's going to replace the child process address space
   with the program 
 
 
-
-
-
+- [reference to `fgets()`](https://novemberfall.github.io/Algorithm-FullStack/C_Pro/fget.html)
+- [reference to `execlp()`](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
 ---
 
-## Now look at p4.c example
+![](img/2020-06-23-16-15-31.png)
+
+- A, after `execlp()`, what exactly is going to do is to replace the child process address
+  space with the new program for `/bin/ls`, as long as `ls` program file running succeed this
+  line. `LINE J` should not be run, except there was an error in the calling.
+
+- [reference to `execlp()`](https://novemberfall.github.io/Algorithm-FullStack/operation/wait.html)
+
+---
+## With redirection
+
+- Now look at p4.c example
 
 ```c++
 #include <stdio.h>
@@ -133,6 +141,8 @@ int main(int argc, char *argv[]){
 - after `close(STDOUT_FILENO);` execute, just basically closing the standard output file
   and redirecting the standard output to a file before the output  
 
+- [reference to redirection | close standard output](https://novemberfall.github.io/Algorithm-FullStack/operation/redirection.html)
+
 ---
 
 ![](img/2020-06-12-11-32-24.png)
@@ -140,11 +150,19 @@ int main(int argc, char *argv[]){
 ---
 
 
-![](img/2020-06-12-11-32-56.png)
+![](img/2020-06-23-18-17-05.png)
 - B, because after the child process for it will continue execution from the next
   instruction. So the address of the next instruction is in the program counter.
 ---
 
+### this is for assginment 3
+![](img/2020-06-23-18-18-49.png)
+- if the child didn't reach the `normal termination` exit point, but instead it was terminated 
+  by a signal. Then with the signals Marco, and that would tell you that the child had an 
+  `abnormal termination` because there was some signal that happened like maybe there was
+  a division by zero, or maybe someone typed kill on the command line.
+
+---
 ![](img/2020-06-12-11-36-00.png)
 - D
 ---
