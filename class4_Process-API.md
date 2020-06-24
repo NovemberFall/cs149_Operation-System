@@ -167,10 +167,61 @@ int main(int argc, char *argv[]){
 - D
 ---
 
+## Zombie process
+- What is a zombie process?
+  - A parent process can wait for the termination of a child process by using the `wait()`
+    system call.
+  - The `wait()` system call is passed a parameter that allows the parent to obtain 
+    the exit status of the child.  
 
+- This system call also returns the process identifier of the terminated child 
+  - the parent can tell which of its children has terminated:
+
+```c++
+pid_t pid;
+int status;
+pid = wait(&status);
+```
+
+- When a process terminates, its resources are deallocated by the operating system.
+- Its entry in the process table must remain there until the parent calls `wait()`, 
+  because the process table contains the process's exit status.
+- A process that has terminated, but whose parent has not yet called `wait()`,
+  is known as a `zombie` process
+  - All process transition to this state when they terminate, but usually they exist as zombies
+    only briefly.
+  - Once the parent calls `wait()`, the process identifier of the zombie process and its entry
+    in the process table are relaeased.
+
+
+#### How to spot(认出) a zombie
+![](img/2020-06-23-20-09-19.png)
+
+
+![](img/2020-06-23-20-10-55.png)
+- A
+---
+
+## Orphan(孤儿) process
+![](img/2020-06-23-20-12-02.png)
+
+#### How to spot an orphaned process
+![](img/2020-06-23-20-13-17.png)
+- B
+
+![](img/2020-06-23-20-15-04.png)
+
+![](img/2020-06-23-20-16-00.png)
+
+---
+![](img/2020-06-23-20-17-28.png)
+
+- A
+
+---
 ![](img/2020-06-12-11-40-50.png)
 - A, 注意 是 `nums[i] *= -i`
-
+- 注意：child process doesn't affect the parent, parent has own copy of program
 
 
 
