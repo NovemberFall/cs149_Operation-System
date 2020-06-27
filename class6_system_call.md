@@ -149,3 +149,4 @@ AABBCCDDEE
 
 ![](img/2020-06-24-00-22-43.png)
 
+- [system call lseek(), read(), write()](https://novemberfall.github.io/Algorithm-FullStack/operation/redirection.html)
