@@ -78,19 +78,21 @@
 - a
 ---
 
+## File Sharing
+
+
 ![](img/2020-06-23-23-29-34.png)
-
-![](img/2020-06-23-23-35-18.png)
-
-- Now, in this case open the file, opening a file then forking so first you open 
-  a file and then you fork, all of `file descriptors` got copied into the child.
-  so both a parent and the child have identical `file descriptors`. When parent
-  increments the offset that offset will be mirrored in the child process.
-
-- so the offset when it's changed in parent. It's also changed for the child 
-  because both parent and child pointing to the same data structures and they
-  share the same offset.
-
+#### fork() and open()
+- after `fork()` call being made, child is sleeping for a while, then both parent
+  and child open the same file, so the same file can be opened by both and then
+  they both write some sequence of characters into the file.
+  - then its process goes to `sleep()`, which is a system call can be useful for
+    assignment 3, this just mean that `close()` is going to wait for a while 
+    before it continues.
+  - they were writing the same things into the same file. If two processes write
+    same characters at the same time, it could be overwritten. 
+- 这里最重要的一点是，child 并没有得到current offset的copy, 就算每一次写东西进文件，
+  parent and child 没有分享offset, 最终导致写的东西被互相覆盖
 
 ```c++
 #include <stdio.h>
@@ -98,7 +100,53 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+int main()
+{
+    char c;
+    int fd;
+    mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
+    const char *pathname = "fork-then-open.out";
+    if (fork() == 0)
+        sleep(1);
+    fd = open(pathname, O_WRONLY | O_CREAT | O_TRUNC, mode);
+
+    for (c = 'A'; c < 'A' + 5; c++) {
+        write(fd, &c, 1);
+        sleep(2);
+    }
+
+    close(fd);
+    return 0;
+}
+
+/* 
+ABCDE
+ */
+```
+
+### another example of file sharing:
+
+![](img/2020-06-23-23-35-18.png)
+
+#### open(), then fork()
+
+- Now, in this case open the file, opening a file then forking so first you open 
+  a file and then you fork, all of `file descriptors` got copied into the child.
+  so both a parent and the child have identical `file descriptors`. Because the
+  offsets into the file set by parent and child. When parent increments the 
+  offset that offset will be mirrored in the child process.
+
+- so the offset when it's changed in parent. It's also changed for the child 
+  because both parent and child pointing to the same data structures and they
+  share the same offset.
+- 这里最重要的一点是，child 得到current offset的copy from parent, parent and child
+  both point to same data strucutures and the share same offset.
+  - And every time either parent or child was writing something. it was also 
+    increment in the current position in the file. so you get all characters
+    repeated twice. One from parent and one from child.
+
+```c++
 int main()
 {
     char c;
