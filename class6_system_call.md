@@ -198,3 +198,38 @@ AABBCCDDEE
 ![](img/2020-06-24-00-22-43.png)
 
 - [system call lseek(), read(), write()](https://novemberfall.github.io/Algorithm-FullStack/operation/redirection.html)
+
+
+![](img/2020-06-28-16-05-48.png)
+- d
+
+
+![](img/2020-06-28-16-06-41.png)
+- B, let's say you don't know how big your file is from the beginning, but you 
+  just know that you want to set it somewhere relative to the end of the file and
+  which flag would you use
+
+---
+
+![](img/2020-06-28-16-11-32.png)
+- a
+
+
+![](img/2020-06-28-16-16-02.png)
+- b
+
+![](img/2020-06-28-16-19-36.png)
+- A, 'd' is printing out, since `lseek(fd, 0, 0)`, set position to be 0, 
+  文件的开始位置，所以 `s` 被 `d` 覆盖
+
+
+
+![](img/2020-06-28-16-27-00.png)
+- c
+
+![](img/2020-06-28-17-17-10.png)
+
+![](img/2020-06-28-17-17-24.png)
+- b
+
+![](img/2020-06-28-17-18-13.png)
