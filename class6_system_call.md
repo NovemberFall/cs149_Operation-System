@@ -232,4 +232,11 @@ AABBCCDDEE
 ![](img/2020-06-28-17-17-24.png)
 - b
 
+---
 ![](img/2020-06-28-17-18-13.png)
+- d
+
+---
+![](img/2020-06-28-17-42-25.png)
+
+- [dup()/ dup2() explantaion:](https://novemberfall.github.io/Algorithm-FullStack/operation/dup.html)
