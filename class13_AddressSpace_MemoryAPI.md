@@ -90,18 +90,47 @@
 
 ![](img/2020-07-26-21-58-41.png)
 
+![](img/2020-07-26-22-01-18.png)
 
+- the problem here is that when you're calling the function. This is going
+  to allocate a new stack frame for the parameters that get passed in which 
+  in this case is and enter the point `a`. And when this function completes. 
+  That stack frame is not going to exist anymore. So essentially, `a` is 
+  local variable for that function called.
 
+## calloc()
 
+![](img/2020-07-26-22-05-52.png)
 
+![](img/2020-07-26-22-06-34.png)
 
+![](img/2020-07-26-22-07-16.png)
 
+---
 
+![](img/2020-07-26-22-07-30.png)
 
+![](img/2020-07-26-22-08-55.png)
 
+---
 
+![](img/2020-07-26-22-10-06.png)
 
+- p1 has problem is that returning is a memory address to a local variable,
+  when the function complete, the stack gets deleted, you're returning the
+  address of x, but that variable x is a local variable that doesn't exist 
+  anymore. so you return the address of x, x is gone.  
+- p2, that problem is we have talked about previously. you have to call
+  `malloc()` for `int *px`,  
+- p3, this function is returning the address of pointer
 
+---
+
+![](img/2020-07-26-22-25-33.png)
+
+![](img/2020-07-26-22-26-00.png)
+
+![](img/2020-07-26-22-27-41.png)
 
 
 
